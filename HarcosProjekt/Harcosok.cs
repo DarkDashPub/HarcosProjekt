@@ -34,9 +34,9 @@ namespace HarcosProjekt
         public void Megkuzd(Harcos kihivo, Harcos kihivott)
         {
             Boolean l = false;
-            do
+            while(l != true)
             {
-                if (kihivo == kihivott)
+                if (kihivo.Equals(kihivott))
                 {
                     Console.WriteLine("A harcos nem támadhatja meg saját magát!");
                     l = true;
@@ -46,37 +46,45 @@ namespace HarcosProjekt
                     Console.WriteLine("A harc nem lehetséges,ugyanis az egyik harcos halott.");
                     l = true;
                 }
+                else 
+                {
+                    Console.WriteLine(kihivo.getNev() + " Megtámadta " + kihivott.getNev() + "-t és " + kihivo.Sebzes + "-val/vel sebezte!");
+                    kihivott.setEletero(kihivott.getEletero() - kihivo.Sebzes);
 
-                Console.WriteLine(kihivo.getNev() + " Megtámadta " + kihivott.getNev() + "-t és " + kihivo.Sebzes + "-val/vel sebezte!");
-                kihivott.setEletero(kihivott.getEletero() - kihivo.Sebzes);
+                    if (kihivott.getEletero() > 0)
+                    {
+                        Console.WriteLine(kihivott.getNev() + " Megtámadta " + kihivo.getNev() + "-t és " + kihivott.Sebzes + "-val/vel sebezte!");
+                        kihivo.setEletero(kihivo.getEletero() - kihivott.Sebzes);
+                    }
 
-                if (kihivott.getEletero() > 0)
-                {
-                    Console.WriteLine(kihivott.getNev() + " Megtámadta " + kihivo.getNev() + "-t és " + kihivott.Sebzes + "-val/vel sebezte!");
-                    kihivo.setEletero(kihivo.getEletero() - kihivott.Sebzes);
+                    else if (kihivott.getEletero() < 1)
+                    {
+                        Console.WriteLine(kihivo.getNev() + " Megölte " + kihivott.getNev() + "-t!");
+                        Console.WriteLine(kihivo.getNev() + " 15 Tapasztalai pontott szerzett.");
+                        kihivo.setTapasztalat(kihivo.getTapasztalat() + 15);
+                        kihivo.setSzint(1);
+                        kihivo.setTapasztalat(0);
+                    }
+                    else if (kihivo.getEletero() < 1)
+                    {
+                        Console.WriteLine(kihivott.getNev() + " Megölte " + kihivo.getNev() + "-t!");
+                        Console.WriteLine(kihivott.getNev() + " 15 Tapasztalai pontott szerzett.");
+                        kihivott.setTapasztalat(kihivott.getTapasztalat() + 15);
+                        kihivo.setSzint(1);
+                        kihivo.setTapasztalat(0);
+                    }
+                    else if (kihivo.getEletero() > 0 && kihivott.getEletero() > 0)
+                    {
+                        Console.WriteLine(kihivo.getNev() + " 5 Tapasztalai pontott szerzett.");
+                        Console.WriteLine(kihivott.getNev() + " 5 Tapasztalai pontott szerzett.");
+                        kihivo.setTapasztalat(kihivo.getTapasztalat() + 5);
+                        kihivott.setTapasztalat(kihivott.getTapasztalat() + 5);
+                    }
                 }
 
-                if (kihivott.getEletero() < 1)
-                {
-                    Console.WriteLine(kihivo.getNev() + " Megölte " + kihivott.getNev() + "-t!");
-                    Console.WriteLine(kihivo.getNev() + " 15 Tapasztalai pontott szerzett.");
-                    kihivo.setTapasztalat(kihivo.getTapasztalat() + 15);
-                }
-                else if (kihivo.getEletero() < 1)
-                {
-                    Console.WriteLine(kihivott.getNev() + " Megölte " + kihivo.getNev() + "-t!");
-                    Console.WriteLine(kihivott.getNev() + " 15 Tapasztalai pontott szerzett.");
-                    kihivott.setTapasztalat(kihivott.getTapasztalat() + 15);
-                }
-                else if (kihivo.getEletero() > 0 && kihivott.getEletero() > 0)
-                {
-                    Console.WriteLine(kihivo.getNev() + " 5 Tapasztalai pontott szerzett.");
-                    Console.WriteLine(kihivott.getNev() + " 5 Tapasztalai pontott szerzett.");
-                    kihivo.setTapasztalat(kihivo.getTapasztalat() + 5);
-                    kihivott.setTapasztalat(kihivott.getTapasztalat() + 5);
-                }
-            } while (l != true);
-            Console.WriteLine(kihivo + "\n" + kihivott);
+                
+            }
+            //Console.WriteLine(kihivo + "\n" + kihivott);
         }
 
         public void Gyogyul(Harcos gyogyitandoHarcos)
