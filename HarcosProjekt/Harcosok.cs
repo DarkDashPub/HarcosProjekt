@@ -133,7 +133,7 @@ namespace HarcosProjekt
             String s = "";
             for (int i = 0; i < harcosok.Count; i++)
             {
-                s += i + ". " + harcosok[i].ToString() + "\n";
+                s += (i+1) + ". " + harcosok[i].ToString() + "\n";
             }
             return s;
         }

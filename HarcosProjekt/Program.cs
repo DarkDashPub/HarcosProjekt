@@ -18,7 +18,7 @@ namespace HarcosProjekt
 
                 if(valasztas == 1 || valasztas == 2 || valasztas == 3 || valasztas == 4 || valasztas == 99) 
                 {
-                    switch (valasztas) 
+                    switch (valasztas)
                     {
                         case 1:
                             h.harcosLetrehozas();
@@ -31,17 +31,47 @@ namespace HarcosProjekt
                             valasztas = Convert.ToInt32(Console.ReadLine());
                             break;
                         case 3:
-                            Console.Write("Adja meg az első harcos sorszámát!: ");
-                            int elso = Convert.ToInt32(Console.ReadLine());
-                            Console.Write("Adja meg a második harcos sorszámát!: ");
-                            int masodik = Convert.ToInt32(Console.ReadLine());
-                            h.Megkuzd(h.harcosok[elso], h.harcosok[masodik]);
+                            Boolean b = false;
+                            int elso = 0;
+                            int masodik = 0;
+                            while (b != true)
+                            {
+                                Console.Write("Adja meg az első harcos sorszámát!: ");
+                                elso = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Adja meg a második harcos sorszámát!: ");
+                                masodik = Convert.ToInt32(Console.ReadLine());
+                                if (elso > h.harcosok.Count || elso < 1 || masodik > h.harcosok.Count || masodik < 1)
+                                {
+                                    Console.WriteLine("Nem megfelelően választott sorszámot,próbálja újra!");
+                                }
+                                else
+                                {
+                                    b = true;
+                                }
+                            }
+                            h.Megkuzd(h.harcosok[elso - 1], h.harcosok[masodik - 1]);
                             Console.WriteLine(s);
                             valasztas = Convert.ToInt32(Console.ReadLine());
                             break;
                         case 4:
                             Console.Write("Melyik harcost kivánja gyógyítani?:");
-                            h.Gyogyul(h.harcosok[Convert.ToInt32(Console.ReadLine())]);
+                            b = false;
+                            int gyogyitId = 0;
+                            while (b != true) 
+                            {
+                                gyogyitId = Convert.ToInt32(Console.ReadLine());
+                                if (gyogyitId < 1 || gyogyitId > h.harcosok.Count)
+                                {
+                                    Console.Write("Nem megfelelő sorszámot adott meg,próbálja újra!: ");
+                                    gyogyitId = Convert.ToInt32(Console.ReadLine());
+
+                                }
+                                else 
+                                {
+                                    h.harcosok[gyogyitId - 1].setEletero(h.harcosok[gyogyitId - 1].MaxEletero);
+                                    b = true;
+                                }
+                            }
                             Console.WriteLine(s);
                             valasztas = Convert.ToInt32(Console.ReadLine());
                             break;
