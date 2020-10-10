@@ -62,16 +62,22 @@ namespace HarcosProjekt
                         Console.WriteLine(kihivo.getNev() + " Megölte " + kihivott.getNev() + "-t!");
                         Console.WriteLine(kihivo.getNev() + " 15 Tapasztalai pontott szerzett.");
                         kihivo.setTapasztalat(kihivo.getTapasztalat() + 15);
-                        kihivo.setSzint(1);
-                        kihivo.setTapasztalat(0);
+                        if (kihivott.getEletero() < 1) 
+                        {
+                            kihivott.setSzint(1);
+                            kihivott.setTapasztalat(0);
+                        }
                     }
                     else if (kihivo.getEletero() < 1)
                     {
                         Console.WriteLine(kihivott.getNev() + " Megölte " + kihivo.getNev() + "-t!");
                         Console.WriteLine(kihivott.getNev() + " 15 Tapasztalai pontott szerzett.");
                         kihivott.setTapasztalat(kihivott.getTapasztalat() + 15);
-                        kihivo.setSzint(1);
-                        kihivo.setTapasztalat(0);
+                        if (kihivo.getEletero() < 1)
+                        {
+                            kihivo.setSzint(1);
+                            kihivo.setTapasztalat(0);
+                        }
                     }
                     else if (kihivo.getEletero() > 0 && kihivott.getEletero() > 0)
                     {
